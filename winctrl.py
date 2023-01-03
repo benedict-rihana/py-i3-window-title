@@ -18,6 +18,7 @@ parser.add_argument(
 default_icon = "ﬓ"
 workspace_icon = ""
 app_icon = {
+    "workspace": workspace_icon,
     "xfce4-terminal": "",
     "code": "﬏",
     "google-chrome": "",
@@ -43,8 +44,6 @@ def window_focused():
 
 
 def format_title(title, wclass):
-    icon = app_icon.get(wclass)
-
     if title.__contains__(" - "):
         title_components = title.split(" - ")
         application = title_components[len(title_components) - 1]
@@ -66,7 +65,9 @@ def format_title(title, wclass):
         icon = app_icon.get(wclass)
         if icon is None:
             icon = default_icon
-        print(icon, title, flush=True)
+        # print("%s  %s" % (icon, title), flush=True)
+        # Bug print 3 times
+        print("", flush=True)
 
 
 def no_window():
