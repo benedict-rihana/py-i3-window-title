@@ -2,6 +2,8 @@
 
 Window Title mechanism in Python for Polybar
 
+![screenshot](screenshot/2023-01-04_03-59.png)
+
 ## Quick Start
 
 1. copy winctrl.py to ~/.local/bin/
