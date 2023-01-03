@@ -49,5 +49,7 @@ modules-left = [your existing modules] window-title maximize closewindow
 ## Refence Links
 
 [i3ipc-python](https://github.com/altdesktop/i3ipc-python)
+
 [argparse](https://docs.python.org/3/howto/argparse.html)
+
 [polybar custom modules](https://github.com/polybar/polybar/wiki/Module:-script)
