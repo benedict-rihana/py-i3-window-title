@@ -27,6 +27,8 @@ app_icon = {
     "steam": "",
     "vmware": "",
     "nvim": "",
+    "ranger": "פּ",
+    "cmus": "",
     "jetbrains-idea-ce": "",  # idea
     "jetbrains-studio": "",  # android studio
     "vlc": "嗢",  # android studio
@@ -48,15 +50,23 @@ def format_title(title, wclass):
         title_components = title.split(" - ")
         application = title_components[len(title_components) - 1]
         information = title_components[0]
-        icon = app_icon.get(application)
+        app_title = extract_app_from_information(application)
+        icon = app_icon.get(app_title)
+        terminal_app = False
         if icon is None:
             icon = app_icon.get(wclass)
+        else:
+            terminal_app = True
         if icon is None:
             icon = default_icon
 
         if wclass == "xfce4-terminal":
             if application is None or application == "":
-                print("%s %s" % (icon, information))
+                print("%s %s" % (icon, information), flush=True)
+            elif terminal_app:
+                print("%s %s" % (icon, app_title.capitalize()), flush=True)
+                terminal_app = False
+                return
             else:
                 print("%s %s ( %s )" % (icon, information, application), flush=True)
                 return
@@ -68,6 +78,15 @@ def format_title(title, wclass):
         # print("%s  %s" % (icon, title), flush=True)
         # Bug print 3 times
         print("", flush=True)
+
+
+def extract_app_from_information(application: str):
+    if application.startswith("nvim"):
+        return "nvim"
+    elif application.startswith("vim"):
+        return "vim"
+    else:
+        return application
 
 
 def no_window():

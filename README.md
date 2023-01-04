@@ -46,6 +46,11 @@ Window Title mechanism in Python for Polybar
 modules-left = [your existing modules] window-title maximize closewindow
 ```
 
+## Plans
+
+1. Move Mappings to ~/.config/winctrl/config.yaml
+2. Fix the bug that when no active window, the title will print 3 times
+
 ## Refence Links
 
 [i3ipc-python](https://github.com/altdesktop/i3ipc-python)
