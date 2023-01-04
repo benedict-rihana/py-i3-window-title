@@ -29,6 +29,7 @@ defauls = config.get("defaults")
 app_icons = config.get("icons")
 terminal_apps = config.get("terminal-class")
 min_title_length = config.get("min-title-length")
+max_title_length = config.get("max-title-length")
 default_icon = defauls.get("default-icon")
 workspace_icon = defauls.get("default-workspace-icon")
 
@@ -94,9 +95,13 @@ def extract_app_from_information(application: str):
 
 
 def format_win_title(title: str):
-    if len(title) < min_title_length:
+    length = len(title)
+    if length < min_title_length:
         return title.ljust(min_title_length, " ")
-    return title
+    elif length <= max_title_length:
+        return title
+    else:
+        return title[0:max_title_length-4] + "...."
 
 
 def no_window():
