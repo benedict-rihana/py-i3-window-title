@@ -58,23 +58,21 @@ def format_title(title, wclass):
                 if icon is None:
                     icon = default_icon
                 if application is None or application == "":
-                    print("%s  | %s" % (icon, information), flush=True)
+                    print("%s  %s" % (icon, information), flush=True)
                 else:
-                    print(
-                        "%s  | %s ( %s )" % (icon, information, application), flush=True
-                    )
+                    print("%s  %s" % (icon, application), flush=True)
                 return
             else:
-                print("%s  | %s" % (icon, app_title.capitalize()), flush=True)
+                print("%s  %s" % (icon, app_title.capitalize()), flush=True)
                 return
         else:
             icon = app_icons.get(wclass)
             if icon is None:
                 icon = default_icon
             if application is None or application == "":
-                print("%s  | %s" % (icon, information), flush=True)
+                print("%s  %s" % (icon, information), flush=True)
             else:
-                print("%s  | %s ( %s )" % (icon, information, application), flush=True)
+                print("%s  %s ( %s )" % (icon, information, application), flush=True)
 
     else:
         icon = app_icons.get(wclass)
