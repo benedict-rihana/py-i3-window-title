@@ -49,8 +49,9 @@ modules-left = [your existing modules] window-title maximize closewindow
 ## Plans
 
 1. Move Mappings to ~/.config/winctrl/config.yaml - Done
-2. Fix the bug that when no active window, the title will print 3 times
+2. Fix the bug that when no active window, the title will print 3 times - Done
 3. Adjust the code structure - check terminal app and non-terminal app separately - Done
+4. Extract app `extract_app_from_information` should also be configurable
 
 ## Refence Links
 

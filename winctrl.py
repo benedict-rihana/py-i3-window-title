@@ -83,6 +83,7 @@ def is_terminal_app(title, winclass):
     return winclass in terminal_apps
 
 
+## Thinking about making this configurable
 def extract_app_from_information(application: str):
     if application.startswith("nvim"):
         return "nvim"
