@@ -101,7 +101,7 @@ def format_win_title(title: str):
     elif length <= max_title_length:
         return title
     else:
-        return title[0:max_title_length-4] + "...."
+        return title[0 : max_title_length - 4] + "...."
 
 
 def no_window():
