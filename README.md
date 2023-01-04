@@ -2,7 +2,7 @@
 
 Window Title mechanism in Python for Polybar
 
-![screenshot](screenshot/2023-01-04_03-59.png)
+![screenshot](screenshot/screenshot.png)
 
 ## Quick Start
 
