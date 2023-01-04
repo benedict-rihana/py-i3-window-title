@@ -58,13 +58,13 @@ def print_terminal_window_title(title, wclass):
             if icon is None:
                 icon = default_icon
             if application is None or application == "":
-                print("%s  %s" % (icon, information), flush=True)
+                print("%s  %s" % (icon, format_win_title(information)), flush=True)
             else:
-                print("%s  %s" % (icon, application), flush=True)
+                print("%s  %s" % (icon, format_win_title(application)), flush=True)
         else:
             print("%s  %s" % (icon, format_win_title(app_title.title())), flush=True)
     else:
-        print("%s  %s" % (icon, application), flush=True)
+        print("%s  %s" % (icon, format_win_title(application)), flush=True)
 
 
 def format_title(title, wclass):
