@@ -40,7 +40,7 @@ Window Title mechanism in Python for Polybar
 
    ```
 
-3. update the polcybar conf to include the modules:
+3. update the polybar conf to include the modules:
 
 ```bash
 modules-left = [your existing modules] window-title maximize closewindow
