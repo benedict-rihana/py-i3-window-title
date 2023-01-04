@@ -43,56 +43,43 @@ def window_focused():
     return focused
 
 
-def format_title(title, wclass):
-    if title.__contains__(" - "):
+def print_terminal_window_title(title, wclass):
+    application = title
+    if title.find(" - ") > 0:
         title_components = title.split(" - ")
         application = title_components[len(title_components) - 1]
         information = title_components[0]
-        is_terminal = is_terminal_app(application, wclass)
         icon = default_icon
-        if is_terminal:
-            app_title = extract_app_from_information(application)
-            icon = app_icons.get(app_title)
-            if icon is None:
-                icon = app_icons.get(wclass)
-                if icon is None:
-                    icon = default_icon
-                if application is None or application == "":
-                    print("%s  %s" % (icon, information), flush=True)
-                else:
-                    print("%s  %s" % (icon, application), flush=True)
-                return
-            else:
-                print(
-                    "%s  %s" % (icon, format_win_title(app_title.title())), flush=True
-                )
-                return
-        else:
+        app_title = extract_app_from_information(application)
+        icon = app_icons.get(app_title)
+        if icon is None:
             icon = app_icons.get(wclass)
             if icon is None:
                 icon = default_icon
             if application is None or application == "":
                 print("%s  %s" % (icon, information), flush=True)
             else:
-                print(
-                    "%s  %s"
-                    % (icon, format_win_title(information + " - " + application)),
-                    flush=True,
-                )
+                print("%s  %s" % (icon, application), flush=True)
+        else:
+            print("%s  %s" % (icon, format_win_title(app_title.title())), flush=True)
+    else:
+        print("%s  %s" % (icon, application), flush=True)
 
+
+def format_title(title, wclass):
+    is_terminal = is_terminal_app(title, wclass)
+    if is_terminal:
+        print_terminal_window_title(title, wclass)
     elif wclass != "workspace":
         icon = app_icons.get(wclass)
         if icon is None:
             icon = default_icon
         print("%s  %s" % (icon, format_win_title(title)), flush=True)
-        # Bug print 3 times
-        # print("", flush=True)
     else:
-        # print("", flush=True)
         print("%s  %s" % (workspace_icon, title), flush=True)
 
 
-def is_terminal_app(application, winclass):
+def is_terminal_app(title, winclass):
     return winclass in terminal_apps
 
 
