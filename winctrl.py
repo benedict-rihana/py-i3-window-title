@@ -2,9 +2,19 @@
 
 from i3ipc import Connection, Event
 from argparse import ArgumentParser
+import yaml
+import os
 
 parser = ArgumentParser(description="i3 window maximize & close")
 
+config_path = os.environ.get("XDG_CONFIG_HOME")
+
+if config_path is None:
+    config_path = "~/.config/winctrl"
+else:
+    config_path = config_path + "/winctrl"
+config_file = open(config_path + "/config.yaml")
+config = yaml.safe_load(config_file)
 
 parser.add_argument(
     "-c",
@@ -15,8 +25,13 @@ parser.add_argument(
     choices=["title", "maximize", "close"],
 )
 
-default_icon = "ﬓ"
-workspace_icon = ""
+defauls = config.get("defaults")
+app_icons = config.get("icons")
+terminal_apps = config.get("terminal-class")
+
+default_icon = defauls.get("default-icon")
+workspace_icon = defauls.get("default-workspace-icon")
+
 app_icon = {
     "workspace": workspace_icon,
     "xfce4-terminal": "",
@@ -50,27 +65,34 @@ def format_title(title, wclass):
         title_components = title.split(" - ")
         application = title_components[len(title_components) - 1]
         information = title_components[0]
-        app_title = extract_app_from_information(application)
-        icon = app_icon.get(app_title)
-        terminal_app = False
-        if icon is None:
-            icon = app_icon.get(wclass)
-        else:
-            terminal_app = True
-        if icon is None:
-            icon = default_icon
-
-        if wclass == "xfce4-terminal":
-            if application is None or application == "":
-                print("%s  | %s" % (icon, information), flush=True)
-            elif terminal_app:
-                print("%s  |%s" % (icon, app_title.capitalize()), flush=True)
-                terminal_app = False
+        is_terminal = is_terminal_app(application, wclass)
+        icon = default_icon
+        if is_terminal:
+            app_title = extract_app_from_information(application)
+            icon = app_icons.get(app_title)
+            if icon is None:
+                icon = app_icon.get(wclass)
+                if icon is None:
+                    icon = default_icon
+                if application is None or application == "":
+                    print("%s  | %s" % (icon, information), flush=True)
+                else:
+                    print(
+                        "%s  | %s ( %s )" % (icon, information, application), flush=True
+                    )
                 return
             else:
-                print("%s  | %s ( %s )" % (icon, information, application), flush=True)
+                print("%s  | %s" % (icon, app_title.capitalize()), flush=True)
                 return
-        print("%s  | %s ( %s )" % (icon, application, information), flush=True)
+        else:
+            icon = app_icon.get(wclass)
+            if icon is None:
+                icon = default_icon
+            if application is None or application == "":
+                print("%s  | %s" % (icon, information), flush=True)
+            else:
+                print("%s  | %s ( %s )" % (icon, information, application), flush=True)
+
     else:
         icon = app_icon.get(wclass)
         if icon is None:
@@ -78,6 +100,10 @@ def format_title(title, wclass):
         # print("%s  %s" % (icon, title), flush=True)
         # Bug print 3 times
         print("", flush=True)
+
+
+def is_terminal_app(application, winclass):
+    return winclass in terminal_apps
 
 
 def extract_app_from_information(application: str):

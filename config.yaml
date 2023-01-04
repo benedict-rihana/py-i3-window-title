@@ -1,0 +1,22 @@
+defaults:
+    default-icon: "ﬓ"
+    default-workspace-icon: ""
+
+icons:
+    workspace: workspace_icon
+    xfce4-terminal: ""
+    code: "﬏"
+    google-chrome: ""
+    microsoft-edge: ""
+    firefox: ""
+    steam: ""
+    vmware: ""
+    nvim: ""
+    ranger: "פּ"
+    cmus: ""
+    jetbrains-idea-ce: ""
+    jetbrains-studio: ""
+    vlc: "嗢"
+
+terminal-class:
+  - "xfce4-terminal"
