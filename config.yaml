@@ -22,3 +22,5 @@ terminal-class:
   - "xfce4-terminal"
 
 min-title-length: 40
+
+max-title-length: 80
