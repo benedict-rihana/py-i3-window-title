@@ -17,7 +17,7 @@ icons:
   jetbrains-idea-ce: ""
   jetbrains-studio: ""
   vlc: "嗢"
-  lazygit: ""
+  lazygit: " "
 
 terminal-class:
   - "xfce4-terminal"
