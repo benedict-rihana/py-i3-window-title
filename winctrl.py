@@ -62,15 +62,15 @@ def format_title(title, wclass):
 
         if wclass == "xfce4-terminal":
             if application is None or application == "":
-                print("%s %s" % (icon, information), flush=True)
+                print("%s  | %s" % (icon, information), flush=True)
             elif terminal_app:
-                print("%s %s" % (icon, app_title.capitalize()), flush=True)
+                print("%s  |%s" % (icon, app_title.capitalize()), flush=True)
                 terminal_app = False
                 return
             else:
-                print("%s %s ( %s )" % (icon, information, application), flush=True)
+                print("%s  | %s ( %s )" % (icon, information, application), flush=True)
                 return
-        print("%s %s ( %s )" % (icon, application, information), flush=True)
+        print("%s  | %s ( %s )" % (icon, application, information), flush=True)
     else:
         icon = app_icon.get(wclass)
         if icon is None:
