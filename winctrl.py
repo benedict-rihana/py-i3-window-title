@@ -32,23 +32,6 @@ terminal_apps = config.get("terminal-class")
 default_icon = defauls.get("default-icon")
 workspace_icon = defauls.get("default-workspace-icon")
 
-app_icon = {
-    "workspace": workspace_icon,
-    "xfce4-terminal": "",
-    "code": "﬏",
-    "google-chrome": "",
-    "microsoft-edge": "",
-    "firefox": "",
-    "steam": "",
-    "vmware": "",
-    "nvim": "",
-    "ranger": "פּ",
-    "cmus": "",
-    "jetbrains-idea-ce": "",  # idea
-    "jetbrains-studio": "",  # android studio
-    "vlc": "嗢",  # android studio
-}
-
 argsv = parser.parse_args()
 
 i3 = Connection()
@@ -71,7 +54,7 @@ def format_title(title, wclass):
             app_title = extract_app_from_information(application)
             icon = app_icons.get(app_title)
             if icon is None:
-                icon = app_icon.get(wclass)
+                icon = app_icons.get(wclass)
                 if icon is None:
                     icon = default_icon
                 if application is None or application == "":
@@ -85,7 +68,7 @@ def format_title(title, wclass):
                 print("%s  | %s" % (icon, app_title.capitalize()), flush=True)
                 return
         else:
-            icon = app_icon.get(wclass)
+            icon = app_icons.get(wclass)
             if icon is None:
                 icon = default_icon
             if application is None or application == "":
@@ -94,7 +77,7 @@ def format_title(title, wclass):
                 print("%s  | %s ( %s )" % (icon, information, application), flush=True)
 
     else:
-        icon = app_icon.get(wclass)
+        icon = app_icons.get(wclass)
         if icon is None:
             icon = default_icon
         # print("%s  %s" % (icon, title), flush=True)
