@@ -28,7 +28,7 @@ parser.add_argument(
 defauls = config.get("defaults")
 app_icons = config.get("icons")
 terminal_apps = config.get("terminal-class")
-
+min_title_length = config.get("min-title-length")
 default_icon = defauls.get("default-icon")
 workspace_icon = defauls.get("default-workspace-icon")
 
@@ -63,7 +63,9 @@ def format_title(title, wclass):
                     print("%s  %s" % (icon, application), flush=True)
                 return
             else:
-                print("%s  %s" % (icon, app_title.capitalize()), flush=True)
+                print(
+                    "%s  %s" % (icon, format_win_title(app_title.title())), flush=True
+                )
                 return
         else:
             icon = app_icons.get(wclass)
@@ -72,15 +74,22 @@ def format_title(title, wclass):
             if application is None or application == "":
                 print("%s  %s" % (icon, information), flush=True)
             else:
-                print("%s  %s ( %s )" % (icon, information, application), flush=True)
+                print(
+                    "%s  %s"
+                    % (icon, format_win_title(information + " - " + application)),
+                    flush=True,
+                )
 
-    else:
+    elif wclass != "workspace":
         icon = app_icons.get(wclass)
         if icon is None:
             icon = default_icon
-        # print("%s  %s" % (icon, title), flush=True)
+        print("%s  %s" % (icon, format_win_title(title)), flush=True)
         # Bug print 3 times
-        print("", flush=True)
+        # print("", flush=True)
+    else:
+        # print("", flush=True)
+        print("%s  %s" % (workspace_icon, title), flush=True)
 
 
 def is_terminal_app(application, winclass):
@@ -94,6 +103,12 @@ def extract_app_from_information(application: str):
         return "vim"
     else:
         return application
+
+
+def format_win_title(title: str):
+    if len(title) < min_title_length:
+        return title.ljust(min_title_length, " ")
+    return title
 
 
 def no_window():
@@ -125,9 +140,14 @@ def on_workspace_focus(i3, e):
 def print_for_window(window):
     window_class = window.window_class
     window_name = window.name
-    if window_class is None or window_class == "":
-        no_window()
-        return
+    window_type = window.type
+    if window_type == "workspace":
+        if action == "title":
+            no_window()
+            return
+        else:
+            print("", flush=True)
+            return
     else:
         print_content(window_name, window_class)
 
