@@ -18,6 +18,9 @@ icons:
   jetbrains-studio: ""
   vlc: "嗢"
   lazygit: " "
+  BattleChasersNightwar: " "
+  Fell Seal: " "
+  tb-linux: " "
 
 terminal-class:
   - "xfce4-terminal"
