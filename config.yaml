@@ -5,6 +5,7 @@ defaults:
 icons:
   workspace: workspace_icon
   xfce4-terminal: ""
+  alacritty: ""
   code: "﬏"
   google-chrome: ""
   microsoft-edge: ""
@@ -24,6 +25,7 @@ icons:
 
 terminal-class:
   - "xfce4-terminal"
+  - "alacritty"
 
 min-title-length: 40
 

@@ -51,23 +51,18 @@ def print_terminal_window_title(title, wclass):
         application = title_components[len(title_components) - 1]
         information = title_components[0]
         icon = default_icon
-        app_title = extract_app_from_information(application)
-        icon = app_icons.get(app_title)
-        if icon is None:
-            icon = app_icons.get(wclass)
-            if icon is None:
-                icon = default_icon
-            if application is None or application == "":
-                print("%s  %s" % (icon, format_win_title(information)), flush=True)
-            else:
-                print("%s  %s" % (icon, format_win_title(application)), flush=True)
-        else:
-            print("%s  %s" % (icon, format_win_title(app_title.title())), flush=True)
-    else:
+    app_title = extract_app_from_information(application)
+    icon = app_icons.get(app_title)
+    if icon is None:
         icon = app_icons.get(wclass)
         if icon is None:
             icon = default_icon
-        print("%s  %s" % (icon, format_win_title(application)), flush=True)
+        if application is None or application == "":
+            print("%s  %s" % (icon, format_win_title(information)), flush=True)
+        else:
+            print("%s  %s" % (icon, format_win_title(application)), flush=True)
+    else:
+        print("%s  %s" % (icon, format_win_title(app_title.title())), flush=True)
 
 
 def print_title_without_wclass(title):
