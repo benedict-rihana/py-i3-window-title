@@ -161,3 +161,4 @@ cython_debug/
 #.idea/
 install.sh
 playground.py
+window-title-polybar-py.code-workspace
